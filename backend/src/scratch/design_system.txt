@@ -1,0 +1,267 @@
+AtomQuest 1.0
+Professional Design System
+Goal Setting & Tracking Portal  ·  Hackathon 1.0
+Context & Design Rationale
+This is an Enterprise HR Goal-Tracking SaaS Portal — not a startup landing page. The users are employees, managers, and HR admins operating within structured workflows. The design must communicate trust, clarity, authority, and structure while avoiding the cold sterility of legacy enterprise tools.
+Reference benchmarks: Linear, Notion, Rippling — structured but warm. Every decision below is grounded in that positioning.
+1.  Typography — Font Stack
+Five role-specific fonts, each chosen for its function at specific sizes and contexts. No font is interchangeable with another in this stack.
+Role
+Font Family
+Weights
+Why
+Display / Hero H1
+Instrument Serif
+400, 400i
+Luxury editorial weight — announces, doesn't shout
+Section Headings H2–H3
+Bricolage Grotesque
+500, 600
+Variable grotesque — structured, modern, near-zero usage
+UI / Body / Labels
+Geist
+300, 400, 500
+Engineered for data-dense UIs, tabular figures built in
+Numbers / Stats / KPIs
+Syne
+600, 700, 800
+Geometric rhythm — progress scores and KPI numbers feel designed
+Code / IDs / Timestamps
+Chivo Mono
+400, 500
+Mono with personality — goal IDs, audit trail timestamps
+■  Google Fonts Import
+@import url('https://fonts.googleapis.com/css2?
+  family=Instrument+Serif:ital@0;1
+  &family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700
+  &family=Syne:wght@600;700;800
+  &family=Chivo+Mono:wght@400;500
+  &display=swap');
+/* Geist: self-host from https://vercel.com/font */
+■  CSS Font Tokens
+:root {
+  --font-display:  'Instrument Serif', Georgia, serif;
+  --font-heading:  'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body:     'Geist', 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-numeric:  'Syne', sans-serif;
+  --font-mono:     'Chivo Mono', 'Fira Code', monospace;
+}
+→ Geist is chosen over Bricolage for body text because its tighter metrics at 12–14px and native tabular figure support are critical for data-dense label contexts.
+→ Bricolage's variable axis shines at 24px+ making it ideal for headings where its optical size range is expressive.
+2.  Color Palette — Tonal Architecture
+Built on a 3-layer tonal system — the same architecture used by Material Design 3 and Figma's internal design teams. Every token has a specific semantic role. No decorative hex values.
+2.1  Primary — Cool Slate Blue
+The anchor color. Corporate-grade blue, tuned to avoid over-saturation. Comparable in tone to Linear and Jira's primaries — authoritative without being aggressive.
+Token
+Light
+Dark
+Rationale
+primary-base
+#2C5CC5
+#7BA7F7
+CTAs, links, focus rings
+primary-subtle
+#E8EEFB
+#1A2A4A
+Selected rows, hover backgrounds
+primary-emphasis
+#1A3E96
+#A8C7FF
+Pressed states, focus outlines
+primary-on
+#FFFFFF
+#0D1B36
+Text ON a primary-filled surface
+2.2  Neutral Scale — Warm Slate
+Most enterprise tools use cold grays that feel sterile. This neutral scale carries a deliberate warm-blue undertone (#0D1020 as darkest, not pure #000000) that keeps the interface professional and human simultaneously.
+Token
+Light
+Dark
+Usage
+neutral-0
+#FAFAFA
+#0F1117
+Page background
+neutral-1
+#F3F4F7
+#161B26
+Card surface
+neutral-2
+#E8EAF0
+#1E2535
+Elevated card / hover bg
+neutral-3
+#CDD1DE
+#2C3550
+Borders, dividers
+neutral-4
+#9399B0
+#4A5275
+Disabled text, placeholder
+neutral-5
+#5A6180
+#8C95B8
+Secondary / muted text
+neutral-6
+#1E2340
+#C8CEEA
+Primary body text
+neutral-7
+#0D1020
+#EBEEFF
+Display / heading text
+→ The warm-blue undertone in the neutral scale is the single most important detail that separates this system from a generic one. Pure blacks and cold grays read 'template.'
+2.3  Accent — Teal (Momentum & Progress)
+Teal communicates forward motion — critical for a goal-tracking tool. Used for progress bars, active check-in states, chart highlights, and on-track goal indicators.
+Token
+Light
+Dark
+Usage
+accent-subtle
+#E0F5F2
+#0D2E2B
+Tinted bg for progress sections
+accent-muted
+#7DCFC7
+#2B7D78
+Muted tags, secondary indicators
+accent-base
+#0FA89E
+#14C4B8
+Progress bars, active goals, chart highlights
+accent-strong
+#087A73
+#6EDFDA
+Hover state for accent elements
+2.4  Semantic Colors — Workflow-Aware
+Not simply 'green = good.' Each semantic color is tied directly to a workflow state within the AtomQuest portal. Both the foreground color and a surface background token are defined for proper contextual use.
+Purpose
+Light
+Dark
+Surface Token
+Used For
+success
+#1A8A5E
+#30D68A
+success-bg
+Goal approved, check-in complete
+warning
+#B86E00
+#F5A524
+warning-bg
+Awaiting approval, goals near deadline
+danger
+#C0280E
+#F26B55
+danger-bg
+Returned for rework, validation fail
+info
+#2259B3
+#6FA3F5
+info-bg
+Check-in window banners, reminders
+2.5  Surface Elevation Stack
+Depth is communicated through surface color progression, not random shadow values. Each layer has a defined role in the visual hierarchy.
+Layer
+Light
+Dark
+Page bg
+#FAFAFA
+#0F1117
+Default card
+#FFFFFF
+#161B26
+Raised card
+#F3F4F7
+#1E2535
+Modal/drawer
+#FFFFFF + shadow
+#222A3F
+Tooltip/pop
+#1E2340 (inverted)
+#EBEEFF (inverted)
+→ Modal and drawer surfaces in dark mode use #222A3F, not the same card surface color — this ensures sufficient separation for the overlay context.
+3.  CSS Token System — Full Reference
+All values are defined as CSS custom properties. Both themes are specified on data attributes enabling runtime switching without a full stylesheet reload.
+■  Light Theme
+[data-theme="light"] {
+  /* Primary */
+  --color-primary:           #2C5CC5;
+  --color-primary-subtle:    #E8EEFB;
+  --color-primary-emphasis:  #1A3E96;
+  --color-primary-on:        #FFFFFF;
+  /* Surfaces */
+  --color-bg:                #FAFAFA;
+  --color-surface:           #FFFFFF;
+  --color-surface-raised:    #F3F4F7;
+  --color-surface-overlay:   #E8EAF0;
+  --color-border:            #CDD1DE;
+  --color-border-strong:     #9399B0;
+  /* Text */
+  --color-text-primary:      #1E2340;
+  --color-text-secondary:    #5A6180;
+  --color-text-disabled:     #9399B0;
+  --color-text-inverse:      #FFFFFF;
+  /* Accent */
+  --color-accent:            #0FA89E;
+  --color-accent-subtle:     #E0F5F2;
+  --color-accent-strong:     #087A73;
+  /* Semantic */
+  --color-success:           #1A8A5E;
+  --color-success-bg:        #E6F7F0;
+  --color-warning:           #B86E00;
+  --color-warning-bg:        #FEF3E2;
+  --color-danger:            #C0280E;
+  --color-danger-bg:         #FDECEA;
+  --color-info:              #2259B3;
+  --color-info-bg:           #EBF1FC;
+}
+■  Dark Theme
+[data-theme="dark"] {
+  /* Primary */
+  --color-primary:           #7BA7F7;
+  --color-primary-subtle:    #1A2A4A;
+  --color-primary-emphasis:  #A8C7FF;
+  --color-primary-on:        #0D1B36;
+  /* Surfaces */
+  --color-bg:                #0F1117;
+  --color-surface:           #161B26;
+  --color-surface-raised:    #1E2535;
+  --color-surface-overlay:   #222A3F;
+  --color-border:            #2C3550;
+  --color-border-strong:     #4A5275;
+  /* Text */
+  --color-text-primary:      #C8CEEA;
+  --color-text-secondary:    #8C95B8;
+  --color-text-disabled:     #4A5275;
+  --color-text-inverse:      #0D1020;
+  /* Accent */
+  --color-accent:            #14C4B8;
+  --color-accent-subtle:     #0D2E2B;
+  --color-accent-strong:     #6EDFDA;
+  /* Semantic */
+  --color-success:           #30D68A;
+  --color-success-bg:        #0B2A1E;
+  --color-warning:           #F5A524;
+  --color-warning-bg:        #2C1D05;
+  --color-danger:            #F26B55;
+  --color-danger-bg:         #2D0D08;
+  --color-info:              #6FA3F5;
+  --color-info-bg:           #0D1B36;
+}
+→ Every dark mode color is independently chosen for that dark background — NOT lightened from the light value. This is the professional difference between a real design system and a quick-inverted one.
+→ Both themes share the same semantic token names. Components reference only tokens, never raw hex values.
+4.  Usage Rules & Anti-Patterns
+■  Typography Rules
+Instrument Serif is display-only — never below 40px, never for UI labels
+Syne is numbers-only — never use it for prose or UI copy
+Chivo Mono is code/data only — audit trail entries, goal IDs, timestamps, hex codes
+Never mix Bricolage and Geist in the same UI element
+Body text minimum 16px (Geist 400) — never go below for primary content
+■  Color Rules
+Components reference CSS tokens only — never hardcode hex values in component code
+Semantic colors (success/warning/danger/info) are for workflow states only — not decoration
+Accent teal is never used as a primary action color — that role belongs to primary blue
+Both the foreground and -bg surface token must be used together for semantic states
+All text must meet WCAG AA contrast (4.5:1 body, 3:1 large text) against its background surface
+AtomQuest 1.0 Design System  ·  Internal Reference Document
