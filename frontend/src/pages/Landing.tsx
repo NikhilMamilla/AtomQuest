@@ -4,9 +4,9 @@ import { useThemeStore } from '../store/themeStore'
 import { motion } from 'framer-motion'
 import {
   Target, Sun, Moon, ArrowRight, CheckCircle2, Shield, BarChart3,
-  Users, ClipboardCheck, Lock, Bell, TrendingUp, FileSpreadsheet,
+  Users, ClipboardCheck, Lock, TrendingUp, FileSpreadsheet,
   Zap, Eye, GitBranch, Calendar, Award, ChevronDown, Share2,
-  Brain, Mail, AlertTriangle, Database, Server, Terminal, ArrowRightLeft,
+  Brain, Mail, AlertTriangle, Database, ArrowRightLeft,
   Copy, Check
 } from 'lucide-react'
 
@@ -25,7 +25,7 @@ const navLinks = [
 function usePillNav() {
   const [visible, setVisible] = useState(true)
   const lastY = useRef(0)
-  const timer = useRef<ReturnType<typeof setTimeout>>()
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const show = useCallback(() => {
     setVisible(true)

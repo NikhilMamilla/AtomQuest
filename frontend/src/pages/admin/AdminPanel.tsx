@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Users, Target, BarChart3, ScrollText, Shield, AlertTriangle, PieChart, CalendarRange } from 'lucide-react'
+import { Shield } from 'lucide-react'
 import UsersTab from './UsersTab'
 import GoalsTab from './GoalsTab'
 import ReportsTab from './ReportsTab'

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { UserPlus, RotateCcw, Mail, Building, Calendar, ArrowDown, Network, Sparkles } from 'lucide-react'
+import { UserPlus, RotateCcw, Mail, Building, Calendar, Network, Sparkles } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { Badge, Button, Input, Select, Modal } from '../../components/common'
 import { adminService } from '../../services/admin'

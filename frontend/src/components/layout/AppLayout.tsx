@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { LogOut, Target, TrendingUp, Users, Shield, Sun, Moon, BarChart3, MessageSquare, Award, Clock, CalendarRange, AlertTriangle, PieChart, ScrollText, Menu, X, CheckCircle2 } from 'lucide-react'
+import { LogOut, Target, TrendingUp, Users, Sun, Moon, BarChart3, MessageSquare, Award, Clock, CalendarRange, AlertTriangle, PieChart, ScrollText, Menu, X, CheckCircle2 } from 'lucide-react'
 import { useAuthStore } from '../../store/authStore'
 import { useThemeStore } from '../../store/themeStore'
 import toast from 'react-hot-toast'

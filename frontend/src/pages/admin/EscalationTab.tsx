@@ -13,7 +13,8 @@ const PRESET_RULES: EscalationRule[] = [
     threshold_days: 7,
     is_active: true,
     created_by_name: 'System',
-    action: 'notify'
+    action: 'notify',
+    created_at: new Date().toISOString()
   },
   {
     id: 992,
@@ -22,7 +23,8 @@ const PRESET_RULES: EscalationRule[] = [
     threshold_days: 5,
     is_active: true,
     created_by_name: 'System',
-    action: 'notify'
+    action: 'notify',
+    created_at: new Date().toISOString()
   },
   {
     id: 993,
@@ -31,7 +33,8 @@ const PRESET_RULES: EscalationRule[] = [
     threshold_days: 14,
     is_active: false,
     created_by_name: 'System',
-    action: 'notify'
+    action: 'notify',
+    created_at: new Date().toISOString()
   }
 ]
 
@@ -40,7 +43,6 @@ const PRESET_LOGS: EscalationLogEntry[] = [
     id: 1001,
     created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
     employee_name: 'Sahithi',
-    employee_email: 'sahithi@atomquest.com',
     manager_name: 'Sreemouna',
     rule_name: 'Manager Approval Auto-Escalate',
     trigger_type: 'approval_pending',
@@ -51,7 +53,6 @@ const PRESET_LOGS: EscalationLogEntry[] = [
     id: 1002,
     created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
     employee_name: 'Adbhutha',
-    employee_email: 'adbhutha@atomquest.com',
     manager_name: 'Nikhitha',
     rule_name: 'Goal Submission SLA Alert',
     trigger_type: 'goal_not_submitted',
@@ -62,7 +63,6 @@ const PRESET_LOGS: EscalationLogEntry[] = [
     id: 1003,
     created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
     employee_name: 'Nikhitha',
-    employee_email: 'nikhitha@atomquest.com',
     manager_name: 'Sahithi',
     rule_name: 'Critical Check-in Overdue warning',
     trigger_type: 'checkin_overdue',
@@ -133,10 +133,12 @@ export default function EscalationTab() {
       const newMockRule: EscalationRule = {
         id: Math.floor(Math.random() * 10000),
         name: form.name,
-        trigger_type: form.trigger_type,
+        trigger_type: form.trigger_type as any,
         threshold_days: Number(form.threshold_days),
         is_active: true,
-        created_by_name: 'Admin (Simulated)'
+        created_by_name: 'Admin (Simulated)',
+        action: 'notify',
+        created_at: new Date().toISOString()
       }
       setRules([newMockRule, ...rules])
       toast.success('Rule created successfully (Simulated Mode)')

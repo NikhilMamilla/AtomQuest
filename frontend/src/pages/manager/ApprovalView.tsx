@@ -12,11 +12,6 @@ import {
   Lock,
   Building,
   Target as TargetIcon,
-  BarChart3,
-  TrendingUp,
-  Users,
-  Award,
-  ChevronDown,
   Share2
 } from 'lucide-react'
 import toast from 'react-hot-toast'

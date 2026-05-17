@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { RotateCcw, TrendingUp, Target, Users, BarChart3, Info, Clock, ShieldAlert, Award } from 'lucide-react'
+import { RotateCcw, TrendingUp, Target, Users, BarChart3, Info, Clock, ShieldAlert } from 'lucide-react'
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
   PieChart, Pie, Cell,
@@ -340,7 +340,7 @@ export default function AnalyticsTab() {
                 <XAxis dataKey="manager_name" tick={{ fontSize: 11, fill: 'var(--color-text-secondary)', fontWeight: 600 }} tickLine={false} axisLine={false} />
                 <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: 'var(--color-text-secondary)', fontWeight: 600 }} tickLine={false} axisLine={false} />
                 <RechartsTooltip
-                  cursor={{ fill: 'rgba(99, 102, 241, 0.05)', radius: [8, 8, 0, 0] }}
+                  cursor={{ fill: 'rgba(99, 102, 241, 0.05)' }}
                   contentStyle={{ 
                     borderRadius: '16px', 
                     backgroundColor: 'var(--color-surface)', 
