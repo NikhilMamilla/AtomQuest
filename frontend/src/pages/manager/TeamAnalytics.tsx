@@ -5,13 +5,7 @@ import {
   Users, 
   Award, 
   TrendingUp, 
-  BarChart3,
-  PieChart as PieIcon,
-  ChevronDown,
-  Sparkles,
-  ArrowUpRight,
-  TrendingDown,
-  Target as TargetIcon
+  BarChart3
 } from 'lucide-react'
 import {
   ResponsiveContainer,
@@ -29,7 +23,7 @@ import {
   Area
 } from 'recharts'
 import toast from 'react-hot-toast'
-import { Badge, Button } from '../../components/common'
+import { Button } from '../../components/common'
 import { checkinsService } from '../../services/checkins'
 import type { Goal } from '../../services/goals'
 
@@ -373,7 +367,7 @@ export default function TeamAnalytics() {
                       verticalAlign="top" 
                       height={36} 
                       iconSize={10} 
-                      iconType="roundRect"
+                      iconType="rect"
                       wrapperStyle={{ fontSize: '11px', fontFamily: 'var(--font-body)' }}
                     />
                     <Area 

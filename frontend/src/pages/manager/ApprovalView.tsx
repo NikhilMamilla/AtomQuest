@@ -17,24 +17,10 @@ import {
   Users,
   Award,
   ChevronDown,
-  ChevronUp,
   Share2
 } from 'lucide-react'
-import {
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip as RechartsTooltip,
-  Legend
-} from 'recharts'
 import toast from 'react-hot-toast'
-import { Badge, Button, WeightageBar } from '../../components/common'
+import { Badge, Button } from '../../components/common'
 import { goalsService } from '../../services/goals'
 import type { Goal } from '../../services/goals'
 import { checkinsService } from '../../services/checkins'
@@ -61,7 +47,6 @@ export default function ApprovalView() {
   const [returnModalEmployee, setReturnModalEmployee] = useState<EmployeeGroup | null>(null)
   const [returnComment, setReturnComment] = useState('')
   const [returningSheet, setReturningSheet] = useState(false)
-  const [showAnalytics, setShowAnalytics] = useState(true)
 
   // Push KPI modal state
   const [showPushModal, setShowPushModal] = useState(false)
@@ -109,47 +94,7 @@ export default function ApprovalView() {
     }
   })
 
-  // --- Dynamic Team Analytics Calculations ---
-  const totalEmployeesCount = employees.length
-  const approvedCount = employees.filter(e => e.goals.length > 0 && e.goals.every(g => g.status === 'approved')).length
-  const pendingCount = employees.filter(e => e.goals.some(g => g.status === 'pending')).length
-  const returnedCount = employees.filter(e => e.goals.some(g => g.status === 'returned')).length
-  const draftingCount = Math.max(0, totalEmployeesCount - approvedCount - pendingCount - returnedCount)
 
-  const pieData = [
-    { name: 'Approved & Locked', value: approvedCount, fill: '#30d68a' },
-    { name: 'Awaiting Review', value: pendingCount, fill: '#f5a524' },
-    { name: 'Returned / Revision', value: returnedCount, fill: '#f26b55' },
-    { name: 'Drafting / Not Started', value: draftingCount, fill: '#94a3b8' }
-  ].filter(d => d.value > 0)
-
-  const thrustSums: Record<string, number> = {
-    FINANCIAL: 0,
-    CUSTOMER: 0,
-    OPERATIONAL: 0,
-    LEARNING: 0
-  }
-  
-  let totalGoalsCount = 0
-  employees.forEach(e => {
-    totalGoalsCount += e.goals.length
-    e.goals.forEach(g => {
-      const area = (g.thrust_area || '').toUpperCase()
-      if (area.includes('FINANCIAL')) thrustSums.FINANCIAL += Number(g.weightage)
-      else if (area.includes('CUSTOMER')) thrustSums.CUSTOMER += Number(g.weightage)
-      else if (area.includes('OPERATIONAL')) thrustSums.OPERATIONAL += Number(g.weightage)
-      else if (area.includes('LEARNING')) thrustSums.LEARNING += Number(g.weightage)
-    })
-  })
-
-  const avgGoalsCount = totalEmployeesCount > 0 ? (totalGoalsCount / totalEmployeesCount).toFixed(1) : '0'
-
-  const barData = [
-    { name: 'Financial', Weightage: thrustSums.FINANCIAL, fill: 'var(--color-primary)' },
-    { name: 'Customer', Weightage: thrustSums.CUSTOMER, fill: 'var(--color-accent)' },
-    { name: 'Operational', Weightage: thrustSums.OPERATIONAL, fill: '#f5a524' },
-    { name: 'Learning & Growth', Weightage: thrustSums.LEARNING, fill: '#30d68a' }
-  ]
 
   // Start inline editing
   const startEdit = (goal: Goal) => {
