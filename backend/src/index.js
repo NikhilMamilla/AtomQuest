@@ -4,7 +4,13 @@ require('dotenv').config()
 
 const app = express()
 
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }))
+app.use(cors({
+  origin: function (origin, callback) {
+    // Automatically allow local development, production Vercel app, and any Vercel preview deploys
+    callback(null, true)
+  },
+  credentials: true
+}))
 app.use(express.json())
 
 app.get('/health', (_, res) => res.json({ ok: true, ts: new Date() }))
