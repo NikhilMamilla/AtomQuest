@@ -8,7 +8,14 @@ export function useAuthBootstrap() {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    if (!token) { setReady(true); return }
+    // If no token exists, immediately set ready to true so the UI can load.
+    // Fire off a non-blocking background ping to wake up the Render backend
+    // from its free-tier sleep so that when the user logs in, it's already warm.
+    if (!token) { 
+      setReady(true)
+      api.get('/health').catch(() => {}) 
+      return 
+    }
     api.get('/auth/me')
       .then(({ data }) => {
         login(token, data, data.role)

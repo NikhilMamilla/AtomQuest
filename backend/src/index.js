@@ -14,6 +14,7 @@ app.use(cors({
 app.use(express.json())
 
 app.get('/health', (_, res) => res.json({ ok: true, ts: new Date() }))
+app.get('/api/health', (_, res) => res.json({ ok: true, ts: new Date() }))
 
 // Email simulation log endpoints
 app.get('/api/emails', (req, res) => {
